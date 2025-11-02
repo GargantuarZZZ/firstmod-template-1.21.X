@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class FirstMod implements ModInitializer {
 	public static final String MOD_ID = "firstmod";
-
+	//aa
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
