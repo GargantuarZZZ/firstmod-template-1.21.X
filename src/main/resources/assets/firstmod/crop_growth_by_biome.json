@@ -1,0 +1,14 @@
+{
+  "groups": [
+    {
+      "name": "desert_fast",
+      "biomes": ["minecraft:desert"],
+      "growth_multiplier": 1.5
+    },
+    {
+      "name": "plains_slow",
+      "biomes": ["minecraft:plains"],
+      "growth_multiplier": 0.5
+    }
+  ]
+}

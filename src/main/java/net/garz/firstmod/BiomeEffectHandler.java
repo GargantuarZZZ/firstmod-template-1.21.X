@@ -14,8 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
-import java.nio.file.Path;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.util.Set;
@@ -69,22 +68,20 @@ public class BiomeEffectHandler {
     }
 
     private static void loadConfig() {
-        Path configPath = null;
         try {
-            configPath = Path.of(System.getProperty("user.dir"))
-                    .resolve("src/main/resources/assets/firstmod/firstmod_biome_effects.json");
-            if (Files.notExists(configPath)) {
-                ConfigData defaultConfig = new ConfigData();
-                // 可选：fill defaultConfig.groups with default entries if你想
-                Gson g = new GsonBuilder().setPrettyPrinting().create();
-                String json = g.toJson(defaultConfig);
-                Files.createDirectories(configPath.getParent());
-                Files.writeString(configPath, json, StandardCharsets.UTF_8);
+            // 从 resource 内读取 JSON 文件
+            String resourcePath = "assets/firstmod/firstmod_biome_effects.json";
+            InputStream in = BiomeEffectHandler.class.getClassLoader().getResourceAsStream(resourcePath);
+            if (in == null) {
+                // 未找到资源，打印错误并返回
+                System.err.println("Resource not found: " + resourcePath);
+                return;
             }
-            String text = Files.readString(configPath, StandardCharsets.UTF_8);
+            String text = new String(in.readAllBytes(), StandardCharsets.UTF_8);
             Gson gson = new GsonBuilder().create();
             ConfigData cfg = gson.fromJson(text, ConfigData.class);
             if (cfg == null) {
+                System.err.println("Parsed config is null");
                 return;
             }
             checkIntervalTicks = cfg.check_interval_ticks;
@@ -104,6 +101,7 @@ public class BiomeEffectHandler {
             e.printStackTrace();
         }
     }
+
 
     private static void handlePlayer(ServerPlayerEntity player) {
         World world = player.getWorld();

@@ -3,7 +3,8 @@
 	"package": "net.garz.firstmod.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"CropBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
