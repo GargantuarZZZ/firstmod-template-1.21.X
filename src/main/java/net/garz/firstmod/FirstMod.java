@@ -12,6 +12,7 @@ public class FirstMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		BiomeEffectHandler.register();
 		LOGGER.info("Hello Fabric world!");
 	}
 }

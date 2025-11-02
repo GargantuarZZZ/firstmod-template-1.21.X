@@ -1,0 +1,28 @@
+{
+  "check_interval_ticks": 20,
+  "groups": [
+    {
+      "name": "slow_zone",
+      "biomes": [
+        "minecraft:swamp",
+        "minecraft:dark_forest"
+      ],
+      "effect": {
+        "type": "slowness",
+        "amplifier": 1,
+        "duration_ticks": 40
+      }
+    },
+    {
+      "name": "speed_zone",
+      "biomes": [
+        "minecraft:desert"
+      ],
+      "effect": {
+        "type": "speed",
+        "amplifier": 1,
+        "duration_ticks": 40
+      }
+    }
+  ]
+}
